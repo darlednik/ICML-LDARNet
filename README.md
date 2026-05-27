@@ -1,0 +1,6 @@
+# ICML-LDARNet
+
+
+   Code for "LDARNet: DNA Adaptive Representation Network..." (ICML 2026).
+   Code release in progress — full pretraining and fine-tuning scripts will be available by July 2026.
+   Contact: a.ledn2026@gmail.com
