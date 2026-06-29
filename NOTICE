@@ -1,0 +1,14 @@
+LDARNet
+Copyright 2026 Daria Ledneva and Denis Kuznetsov
+
+This product includes software developed for the paper
+"LDARNet: DNA Adaptive Representation Network with Learnable Tokenization
+for Genomic Modeling" (https://arxiv.org/abs/2606.04552).
+
+Portions of this software are derived from or build upon:
+  - H-Net           (https://github.com/goombalab/hnet)
+  - Caduceus        (https://github.com/kuleshov-group/caduceus)
+  - mamba-ssm       (https://github.com/state-spaces/mamba)
+  - flash-attention (https://github.com/Dao-AILab/flash-attention)
+
+Each retains its own copyright and license; see the respective projects.

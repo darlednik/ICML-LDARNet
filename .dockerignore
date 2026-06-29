@@ -1,0 +1,13 @@
+*
+!.dockerignore
+!Dockerfile
+!pyproject.toml
+!pretrain.py
+!ldar/
+!ldar/**
+!wheels/
+!wheels/**
+
+**/.ipynb_checkpoints
+**/__pycache__
+**/*.pyc

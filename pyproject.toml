@@ -1,0 +1,31 @@
+[project]
+name = "ldar"
+version = "0.0.1"
+description = "LDARNet pretraining"
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.7.0",
+    "flash_attn==2.8.0.post2",
+    "mamba_ssm",
+    "causal_conv1d",
+    "einops",
+    "optree",
+    "regex",
+    "omegaconf",
+    "numpy==1.23.1",
+    "pyfaidx",
+    "pandas",
+    "datasets",
+    "tqdm",
+    "matplotlib",
+    "transformers>=4.45,<4.49",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ldar*"]
+exclude = ["tests*"]
+
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
