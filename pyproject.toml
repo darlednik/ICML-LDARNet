@@ -16,6 +16,8 @@ dependencies = [
     "pyfaidx",
     "pandas",
     "datasets",
+    "scikit-learn",
+    "scipy",
     "tqdm",
     "matplotlib",
     "transformers>=4.45,<4.49",

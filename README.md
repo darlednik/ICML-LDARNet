@@ -12,6 +12,10 @@ a multispecies collection.
 
 📄 **Paper:** [LDARNet: DNA Adaptive Representation Network with Learnable Tokenization for Genomic Modeling](https://arxiv.org/abs/2606.04552) (ICML 2026)
 
+> **Note on the paper:** the published manuscript contains a typo regarding the
+> model size. The released checkpoint is the **110M-parameter** LDARNet; we will
+> update the arXiv version accordingly.
+
 This repository contains the model implementation and the MLM pretraining
 pipeline used to train LDARNet from scratch.
 
@@ -37,10 +41,62 @@ pipeline used to train LDARNet from scratch.
 ```
 ldar/           model + datasets + collator
 pretrain.py     multi-GPU entry point
+notebooks/      boundary interpretability (Figures 1–6)
 Dockerfile      CUDA 12.9, PyTorch 2.7.1, pinned transformers
 wheels/         GPU wheels for Docker (not in git — see wheels/README.md)
 scripts/        verify_env.sh, download_wheels.sh
 ```
+
+## Pretrained weights
+
+The 110M checkpoint is hosted on Hugging Face:
+**[darlednik/LDARNet-110M](https://huggingface.co/darlednik/LDARNet-110M)**
+
+Download into `models_ckpts/` (used by evaluation and optional local caching):
+
+```bash
+pip install "huggingface_hub>=0.24.0,<1.0"
+huggingface-cli download darlednik/LDARNet-110M model_ckpt_110m.pt --local-dir models_ckpts
+```
+
+Load in Python (config is embedded in the checkpoint):
+
+```python
+import torch
+from ldar.utils.ckpt import load_ldar_from_ckpt
+
+model, cfg = load_ldar_from_ckpt(
+    "models_ckpts/model_ckpt_110m.pt",
+    device="cuda",
+    dtype=torch.bfloat16,
+)
+```
+
+## Biological interpretability notebook
+
+[`notebooks/boundary_interpretability.ipynb`](notebooks/boundary_interpretability.ipynb)
+reproduces the boundary-analysis figures from the paper:
+
+- **Fig 1** — average router boundary profiles centered on regulatory motifs (TATA, CAAT, Kozak, Inr)
+- **Fig 2** — splice donor/acceptor boundary enrichment (± strand)
+- **Fig 3** — curated loci (HBB promoter from GRCh38 when FASTA is mounted; SV40 / splice controls)
+- **Fig 4** — native vs dinucleotide-shuffled motif backgrounds
+- **Fig 5** — boundary density along sequence length
+- **Fig 6** — HBB TSS window from the reference genome
+
+The notebook **downloads weights automatically** from
+[darlednik/LDARNet-110M](https://huggingface.co/darlednik/LDARNet-110M) on first run
+(or reuses `models_ckpts/model_ckpt_110m.pt` if already present).
+
+```bash
+jupyter notebook notebooks/boundary_interpretability.ipynb
+```
+
+**Optional:** mount GRCh38 for Fig 3 (HBB) and Fig 6 — see [Data layout](#data-layout-mount-separately)
+(`ldar_data/ldar_data.fa`). NT downstream tasks (Figs 2, search pools) require `datasets`
+and internet on first fetch.
+
+Figures are saved under `figures/boundary_interpretability/`.
 
 ## Setup from a clean clone
 

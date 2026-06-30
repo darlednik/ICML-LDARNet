@@ -9,6 +9,7 @@ wheels/*.whl
 ldar_data/
 models_ckpts/
 logs/
+results/
 images/
 
 # runtime
