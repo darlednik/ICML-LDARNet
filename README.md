@@ -16,6 +16,14 @@ a multispecies collection.
 > model size. The released checkpoint is the **110M-parameter** LDARNet; we will
 > update the arXiv version accordingly.
 
+> **Updated NT downstream results (post-submission).** After camera-ready, we fixed
+> a numerical precision bug in the EMA dechunker (bf16 → fp32 scan). On the released
+> checkpoint, LDARNet reaches **15/18 best among models <300M** on the Nucleotide
+> Transformer benchmark (11/18 in the paper) and **9/18 best overall**. Per-fold
+> metrics for all 18 tasks are in [`evaluation/fold_results/`](evaluation/fold_results/);
+> full table, baselines, and repro: [`evaluation/README.md`](evaluation/README.md).
+> **The paper is being updated to reflect these numbers.**
+
 This repository contains the model implementation and the MLM pretraining
 pipeline used to train LDARNet from scratch.
 
@@ -41,6 +49,7 @@ pipeline used to train LDARNet from scratch.
 ```
 ldar/           model + datasets + collator
 pretrain.py     multi-GPU entry point
+evaluation/     NT downstream eval (18 tasks, 10-fold CV)
 notebooks/      boundary interpretability (Figures 1–6)
 Dockerfile      CUDA 12.9, PyTorch 2.7.1, pinned transformers
 wheels/         GPU wheels for Docker (not in git — see wheels/README.md)
@@ -97,6 +106,18 @@ jupyter notebook notebooks/boundary_interpretability.ipynb
 and internet on first fetch.
 
 Figures are saved under `figures/boundary_interpretability/`.
+
+## Nucleotide Transformer downstream evaluation
+
+18-task NT benchmark (10-fold CV, tuned LR/BS per task). See the
+[**results table and reproduction guide**](evaluation/README.md).
+
+Per-fold `test_mcc` JSON for all 18 configs:
+[`evaluation/fold_results/`](evaluation/fold_results/).
+
+```bash
+bash evaluation/run_eval.sh   # edit GPUS in the script first
+```
 
 ## Setup from a clean clone
 

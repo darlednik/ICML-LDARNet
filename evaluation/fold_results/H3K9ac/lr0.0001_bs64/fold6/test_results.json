@@ -1,0 +1,11 @@
+{
+  "test_loss": 1.8230490684509277,
+  "test_accuracy": 0.8261964735516373,
+  "test_f1_score": 0.8266672023663104,
+  "test_mcc": 0.6528387776547953,
+  "test_auroc": 0.8963610655879513,
+  "test_runtime": 6.5101,
+  "test_samples_per_second": 426.874,
+  "test_steps_per_second": 6.759,
+  "epoch": 15.0
+}
