@@ -90,4 +90,3 @@ done
 echo "Waiting for remaining jobs..."
 wait
 echo "Done. ${ntask} tasks finished. Summaries: $OUT/<task>/lr*_bs*/results_summary.json"
-echo "Aggregate table: python evaluation/aggregate_results.py $OUT --markdown"

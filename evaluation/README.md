@@ -71,11 +71,6 @@ Run all 18 tasks (edit `GPUS` in `run_eval.sh` to match your machine):
 bash evaluation/run_eval.sh
 ```
 
-Aggregate per-fold results into the table above:
-
-```bash
-python evaluation/aggregate_results.py results/nt_110m_ldarnet --markdown
-```
-
-Each task writes fold-level metrics under
+Fresh runs write fold-level metrics under
 `results/nt_110m_ldarnet/<task>/lr<lr>_bs<bs>/fold*/test_results.json`.
+The committed numbers in the table above come from [`fold_results/`](fold_results/).
